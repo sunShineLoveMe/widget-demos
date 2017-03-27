@@ -2,10 +2,38 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+// var vuxLoader = require('vux-loader')
+
+const webpackConfig = {} // 原来的webpack配置
+
+const vuxLoader = require('vux-loader')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
+
+module.exports = vuxLoader.merge(webpackConfig, {
+  options: {},
+  plugins: [{
+    name: 'vux-ui'
+  },
+  {
+     name: 'i18n',
+     vuxStaticReplace: true,
+     vuxLocale: 'en'
+  }]
+})
+
+// const webpackConfig = {}
+
+// module.exports = vuxLoader.merge(webpackConfig, {
+//   options: {},
+//   plugins: [
+//     {
+//       name: 'vux-ui'
+//     }
+//   ]
+// })
 
 module.exports = {
   entry: {
